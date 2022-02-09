@@ -13,7 +13,7 @@ namespace CityWork.Services.Product.API
         {
 
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(appSettings.ConnectionStrings.CityWorkConnectionString));
-            services.AddApplicationServices<ProductDbContext>(Assembly.GetExecutingAssembly());
+            services.AddApplicationServices<ProductDbContext>(Assembly.GetExecutingAssembly(),appSettings);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return services;

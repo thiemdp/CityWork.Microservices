@@ -17,7 +17,9 @@ namespace CityWork.Infrastructure
         {
             get
             {
-                return _context.HttpContext.User.Identity.IsAuthenticated;
+                if (_context.HttpContext?.User != null)
+                    return _context.HttpContext.User.Identity.IsAuthenticated;
+                return false;
             }
         }
 
@@ -25,8 +27,8 @@ namespace CityWork.Infrastructure
         {
             get
             {
-                var userId = _context.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                    ?? _context.HttpContext.User.FindFirst("sub")?.Value;
+                var userId = _context?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                    ?? _context?.HttpContext?.User.FindFirst("sub")?.Value;
                 if(!string.IsNullOrEmpty(userId))
                     return Guid.Parse(userId);
                 return null;

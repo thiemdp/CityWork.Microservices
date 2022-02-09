@@ -14,20 +14,23 @@ namespace CityWork.Application
 {
     public static class ApplicationServicesExtensions
     {
-        public static IServiceCollection AddApplicationServices<TDbContext>(this IServiceCollection services, Assembly assembly)
+        public static IServiceCollection AddApplicationServices<TDbContext>(this IServiceCollection services, Assembly assembly, AppSettings appSettings)
             where TDbContext : DbContext
         {
+            services.AddSingleton(appSettings);
             services.AddMediatR(assembly);
             services.AddAutoMapper(assembly);
             services.AddScoped<Dispatcher>();
             services.AddScoped<ICurrentUser, CurrentWebUser>();
             services.AddDateTimeProvider();
+            services.AddCaches(appSettings.Caching);
             //.net 6 Error????
             //services.AddTransient(typeof(IRepository<>), typeof(DbContextRepository<,>));
             //services.AddTransient(typeof(IRepository<,>), typeof(DbContextRepository<,,>));
 
             //services.AddTransient(typeof(ICRUDServices<>), typeof(CRUDServices<>));
             //services.AddTransient(typeof(ICRUDServices<,>), typeof(CRUDServices<,>));
+            services.AddMessageBrokerWithMassTransit(appSettings);
             services.AddServicesFromDbContext<TDbContext>();
             return services;
         }

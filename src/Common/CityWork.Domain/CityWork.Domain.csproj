@@ -4,10 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>CityWork.Domain</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>Thiemdp</Authors>
+    <Company>EKGIS</Company>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
 
 </Project>

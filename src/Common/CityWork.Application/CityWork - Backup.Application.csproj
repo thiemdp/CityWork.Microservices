@@ -8,7 +8,6 @@
     <PackageId>CityWork.Application</PackageId>
     <Company>EKGIS</Company>
     <Authors>Thiemdp</Authors>
-    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

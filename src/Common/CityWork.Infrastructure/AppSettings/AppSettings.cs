@@ -11,6 +11,10 @@ namespace CityWork.Infrastructure
         public ConnectionStrings ConnectionStrings { get; set; }
 
         public LoggingOptions Logging { get; set; }
+
+        public CachingOptions Caching { get; set; }
+
+        public MessageBrokerOptions MessageBroker { get; set; }
     }
 
     public class ConnectionStrings

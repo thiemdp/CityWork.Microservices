@@ -2,7 +2,7 @@
 
 namespace CityWork.Services.Product.API
 {
-    public class Product : AggregateRoot
+    public class Product : AggregateRoot,ICheckEntityChange
     {
         [MaxLength(100)]
         [Required]

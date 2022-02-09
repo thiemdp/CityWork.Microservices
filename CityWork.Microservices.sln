@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuditLog", "AuditLog", "{66
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{6ED2C6E5-4620-407F-8087-D59474DF20CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityWork.Services.Product.API", "src\Services\Product\CityWork.Services.Product.API\CityWork.Services.Product.API.csproj", "{DE485F87-0D06-486A-BC46-A583CBD903A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityWork.Services.Product.API", "src\Services\Product\CityWork.Services.Product.API\CityWork.Services.Product.API.csproj", "{DE485F87-0D06-486A-BC46-A583CBD903A6}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C627F9A1-B169-4A2B-BE73-BA4E5C2E3025}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{DE485F87-0D06-486A-BC46-A583CBD903A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE485F87-0D06-486A-BC46-A583CBD903A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE485F87-0D06-486A-BC46-A583CBD903A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C627F9A1-B169-4A2B-BE73-BA4E5C2E3025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C627F9A1-B169-4A2B-BE73-BA4E5C2E3025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C627F9A1-B169-4A2B-BE73-BA4E5C2E3025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C627F9A1-B169-4A2B-BE73-BA4E5C2E3025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
