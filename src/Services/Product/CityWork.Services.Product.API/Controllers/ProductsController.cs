@@ -46,5 +46,12 @@ namespace CityWork.Services.Product.API.Controllers
               await _dispatcher.DispatchAsync(input);
             return Ok();
         }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult<PagedResult<AuditLogFullResponse>>> GetAuditlogAsync([FromQuery] GetAuditLogPagedAndSortedQuery input)
+        {
+            var result = await _dispatcher.DispatchAsync(input);
+            return result;
+        }
     }
 }

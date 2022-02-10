@@ -1,6 +1,11 @@
 version: '3.4'
 
 services:
+  eureka:
+    image: steeltoeoss/eureka-server
+    container_name: discoveryservice-eureka
+    ports:
+       - 8761:8761
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -11,7 +16,7 @@ services:
        - rabbitmqdata:/var/lib/rabbitmq
     hostname: rabbitmq
 
-  # elasticsearch + Kibala
+  # elasticsearch + Kibana
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
     container_name: elasticsearch

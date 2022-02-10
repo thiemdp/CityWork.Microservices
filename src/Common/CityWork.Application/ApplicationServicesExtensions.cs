@@ -1,22 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CityWork.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using CityWork.Domain;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 namespace CityWork.Application
 {
     public static class ApplicationServicesExtensions
     {
-        public static IServiceCollection AddApplicationServices<TDbContext>(this IServiceCollection services, Assembly assembly, AppSettings appSettings)
+        public static IServiceCollection AddApplicationServices<TDbContext>(this IServiceCollection services, Assembly assembly,IConfiguration configuration, AppSettings appSettings)
             where TDbContext : DbContext
         {
+            services.AddEurekaServicesDiscovery(configuration);
             services.AddSingleton(appSettings);
             services.AddMediatR(assembly);
             services.AddAutoMapper(assembly);
