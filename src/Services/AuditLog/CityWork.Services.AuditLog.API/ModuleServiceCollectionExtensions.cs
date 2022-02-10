@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 namespace CityWork.Services.AuditLog.API
 {
@@ -19,12 +21,21 @@ namespace CityWork.Services.AuditLog.API
             return services;
         }
 
-        public static void MigrateDatabase(this IApplicationBuilder app)
+        public static void UseModuleMiddleware(this IApplicationBuilder app)
         {
+            app.UseDiscoveryClientEureka();
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 serviceScope.ServiceProvider.GetRequiredService<AuditLogDbContext>().Database.Migrate();
             }
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/quickhealth");
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+            });
         }
     }
 }

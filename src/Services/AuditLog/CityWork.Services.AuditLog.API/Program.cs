@@ -1,4 +1,7 @@
 using CityWork.Services.AuditLog.API;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseCityWorkLogger(configuration =>
@@ -15,18 +18,19 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddModule(builder.Configuration,AppSettings);
 var app = builder.Build();
 
-app.UseDiscoveryClientEureka();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseRouting();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-
 app.MapControllers();
-app.MigrateDatabase();
+
+app.UseModuleMiddleware();
 app.Run();

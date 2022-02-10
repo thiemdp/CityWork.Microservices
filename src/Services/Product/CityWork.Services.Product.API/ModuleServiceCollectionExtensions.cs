@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 namespace CityWork.Services.Product.API
 {
     public static class ModuleServiceCollectionExtensions
     {
-        public static IServiceCollection AddProductModule(this IServiceCollection services,IConfiguration configuration, AppSettings appSettings)
+        public static IServiceCollection AddModule(this IServiceCollection services,IConfiguration configuration, AppSettings appSettings)
         {
 
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(appSettings.ConnectionStrings.CityWorkConnectionString));
@@ -19,12 +21,21 @@ namespace CityWork.Services.Product.API
             return services;
         }
 
-        public static void MigrateDatabase(this IApplicationBuilder app)
+        public static void UseModuleMiddleware(this IApplicationBuilder app)
         {
+            app.UseDiscoveryClientEureka();
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 serviceScope.ServiceProvider.GetRequiredService<ProductDbContext>().Database.Migrate();
             }
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/quickhealth");
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+            });
         }
         //internal static void InitDatabase(this IApplicationBuilder app)
         //{

@@ -21,6 +21,11 @@ namespace CityWork.Infrastructure
     {
         public string Provider { get; set; }
         public string CityWorkConnectionString { get; set; }
+        public bool UseMSSQL => this.Provider == "MSSQL";
+        public bool UseSQLite => this.Provider == "SQLite";
+        public bool UseMySQL => this.Provider == "MySQL";
+        public bool UsePostgreSQL => this.Provider == "PostgreSQL";
+
     }
 
 }

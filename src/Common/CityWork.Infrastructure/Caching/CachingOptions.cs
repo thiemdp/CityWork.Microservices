@@ -15,6 +15,10 @@ namespace CityWork.Infrastructure
         public RedisOptions Redis { get; set; }
 
         public SqlServerOptions SqlServer { get; set; }
+
+        public bool UseInMemory => Provider == "InMemory";
+        public bool UseRedis => Provider == "Redis";
+        public bool UseSqlServer => Provider == "SqlServer";
     }
 
     public class InMemoryCacheOptions

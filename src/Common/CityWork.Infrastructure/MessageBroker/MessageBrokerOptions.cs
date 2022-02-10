@@ -15,15 +15,10 @@ namespace CityWork.Infrastructure
         {
             return !string.IsNullOrEmpty(Provider);
         }
-        public bool UsedRabbitMQ()
-        {
-            return Provider == "RabbitMQ";
-        }
+        public bool UsedRabbitMQ => Provider == "RabbitMQ";
 
-        public bool UsedKafka()
-        {
-            return Provider == "Kafka";
-        }
+        public bool UsedKafka => Provider == "Kafka";
+         
     }
      
     public class RabbitMQOptions

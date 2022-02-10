@@ -18,7 +18,7 @@ namespace CityWork.Infrastructure
             services.AddScoped<IPublishEvent, PublishEvent>();
             if (appSettings.MessageBroker.UsedMessageBroker())
             {
-                if (appSettings.MessageBroker.UsedRabbitMQ())
+                if (appSettings.MessageBroker.UsedRabbitMQ)
                 {
                     services.AddMassTransit(configure =>
                     {

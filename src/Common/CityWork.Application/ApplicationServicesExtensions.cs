@@ -29,6 +29,7 @@ namespace CityWork.Application
             //services.AddTransient(typeof(ICRUDServices<,>), typeof(CRUDServices<,>));
             services.AddMessageBrokerWithMassTransit(appSettings);
             services.AddServicesFromDbContext<TDbContext>();
+            services.AddCityWorkHealthChecks(appSettings);
             return services;
         }
         public static IServiceCollection AddServicesFromDbContext<TDbContext>(this IServiceCollection services)
