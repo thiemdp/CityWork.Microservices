@@ -5,32 +5,38 @@ using MediatR;
 using CityWork.Domain;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Builder;
 
 namespace CityWork.Application
 {
     public static class ApplicationServicesExtensions
     {
-        public static IServiceCollection AddApplicationServices<TDbContext>(this IServiceCollection services, Assembly assembly,IConfiguration configuration, AppSettings appSettings)
+        public static WebApplicationBuilder AddApplicationServices<TDbContext>(this WebApplicationBuilder builder, Assembly assembly, AppSettings appSettings)
             where TDbContext : DbContext
         {
-            services.AddEurekaServicesDiscovery(configuration);
-            services.AddSingleton(appSettings);
-            services.AddMediatR(assembly);
-            services.AddAutoMapper(assembly);
-            services.AddScoped<Dispatcher>();
-            services.AddScoped<ICurrentUser, CurrentWebUser>();
-            services.AddDateTimeProvider();
-            services.AddCaches(appSettings.Caching);
+            builder.Host.UseCityWorkLogger(configuration =>
+            {
+                return new LoggingOptions();
+            });
+            builder.Services.AddEurekaServicesDiscovery(builder.Configuration);
+            builder.Services.AddSingleton(appSettings);
+            builder.Services.AddMediatR(assembly);
+            builder.Services.AddAutoMapper(assembly);
+            builder.Services.AddScoped<Dispatcher>();
+            builder.Services.AddScoped<ICurrentUser, CurrentWebUser>();
+            builder.Services.AddDateTimeProvider();
+            builder.Services.AddCaches(appSettings.Caching);
             //.net 6 Error????
             //services.AddTransient(typeof(IRepository<>), typeof(DbContextRepository<,>));
             //services.AddTransient(typeof(IRepository<,>), typeof(DbContextRepository<,,>));
 
             //services.AddTransient(typeof(ICRUDServices<>), typeof(CRUDServices<>));
             //services.AddTransient(typeof(ICRUDServices<,>), typeof(CRUDServices<,>));
-            services.AddMessageBrokerWithMassTransit(appSettings);
-            services.AddServicesFromDbContext<TDbContext>();
-            services.AddCityWorkHealthChecks(appSettings);
-            return services;
+            builder.Services.AddMessageBrokerWithMassTransit(appSettings);
+            builder.Services.AddServicesFromDbContext<TDbContext>();
+            builder.Services.AddCityWorkHealthChecks(appSettings);
+            builder.AddMonitoringServices(appSettings.Monitoring);
+            return builder;
         }
         public static IServiceCollection AddServicesFromDbContext<TDbContext>(this IServiceCollection services)
            where TDbContext : DbContext

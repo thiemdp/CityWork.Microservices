@@ -11,22 +11,23 @@ namespace CityWork.Services.AuditLog.API
 {
     public static class ModuleServiceCollectionExtensions
     {
-        public static IServiceCollection AddModule(this IServiceCollection services,IConfiguration configuration, AppSettings appSettings)
+        public static WebApplicationBuilder AddCityWorkModule(this WebApplicationBuilder builder )
         {
-
-            services.AddDbContext<AuditLogDbContext>(options => options.UseSqlServer(appSettings.ConnectionStrings.CityWorkConnectionString));
-            services.AddApplicationServices<AuditLogDbContext>(Assembly.GetExecutingAssembly(), configuration, appSettings);
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            return services;
+            var appSettings = new AppSettings();
+            builder.Configuration.Bind(appSettings);
+            builder.Services.AddDbContext<AuditLogDbContext>(options => options.UseSqlServer(appSettings.ConnectionStrings.CityWorkConnectionString));
+            builder.AddApplicationServices<AuditLogDbContext>(Assembly.GetExecutingAssembly(), appSettings);
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            return builder;
         }
 
         public static void UseModuleMiddleware(this IApplicationBuilder app)
         {
             app.UseDiscoveryClientEureka();
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+           
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
             {
-                serviceScope.ServiceProvider.GetRequiredService<AuditLogDbContext>().Database.Migrate();
+                serviceScope?.ServiceProvider.GetRequiredService<AuditLogDbContext>().Database.Migrate();
             }
             app.UseEndpoints(endpoints =>
             {

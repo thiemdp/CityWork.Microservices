@@ -11,14 +11,15 @@ namespace CityWork.Services.Product.API
 {
     public static class ModuleServiceCollectionExtensions
     {
-        public static IServiceCollection AddModule(this IServiceCollection services,IConfiguration configuration, AppSettings appSettings)
+        public static WebApplicationBuilder AddCityWorkModule(this WebApplicationBuilder builder)
         {
+            var appSettings = new AppSettings();
+            builder.Configuration.Bind(appSettings);
 
-            services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(appSettings.ConnectionStrings.CityWorkConnectionString));
-            services.AddApplicationServices<ProductDbContext>(Assembly.GetExecutingAssembly(), configuration, appSettings);
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            return services;
+            builder.Services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(appSettings.ConnectionStrings.CityWorkConnectionString));
+            builder.AddApplicationServices<ProductDbContext>(Assembly.GetExecutingAssembly(), appSettings);
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            return builder;
         }
 
         public static void UseModuleMiddleware(this IApplicationBuilder app)
