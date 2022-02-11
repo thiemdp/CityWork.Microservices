@@ -1,8 +1,10 @@
 # CityWork.Microservices
 CityWork Microservices is a framework development application
+# :game_die: Achitecture
+- DDD
+- CQRS
 # :hearts: Technical stacks
 - ✔️ **[`.NET Core 6`](https://dotnet.microsoft.com/download)** - .NET Framework and .NET Core, including ASP.NET and ASP.NET Core
-
 - ✔️ **[`MediatR`](https://github.com/jbogard/MediatR)** - Simple, unambitious mediator implementation in .NET
 - ✔️ **[`EF Core`](https://github.com/dotnet/efcore)** - Modern object-database mapper for .NET. It supports LINQ queries, change tracking, updates, and schema migrations
 - ✔️ **[`MassTransit`](http://masstransit-project.com/)** - A free, open-source distributed application framework for .NET
