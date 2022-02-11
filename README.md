@@ -25,8 +25,8 @@ CityWork Microservices is a framework development application
 - ✔️ **[`Caching`]**
 - ✔️ **[`AuditLog`]**
 - ✔️ **[`Respository + UnitOfWork`]**
-- ✔️ **[`HealthChecks`]**
-- ✔️ **[`Logging`]**
-- ✔️ **[`MessageBroker - using RabbitMQ`]**
+- ✔️ `HealthChecks`
+- ✔️ **`Logging`**
+- ✔️ **`MessageBroker - using RabbitMQ`**
 - ✔️ **[`Monitoring - using Grafana + Prometheus`]**
 - ✔️ **[`ServicesDiscovery - using Eureka`]**
