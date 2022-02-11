@@ -21,12 +21,12 @@ CityWork Microservices is a framework development application
 -  **[`Blazor - WASM`](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)** - Client web apps with C#
 -  **[`BFF`](https://github.com/DuendeSoftware/BFF)** - Framework for ASP.NET Core to secure SPAs using the Backend-for-Frontend (BFF) pattern
 # :anger: Features
-- ✔️ **[`Auto register Services`]
-- ✔️ **[`Caching`]
-- ✔️ **[`AuditLog`]
-- ✔️ **[`Respository + UnitOfWork`]
-- ✔️ **[`HealthChecks`]
-- ✔️ **[`Logging`]
-- ✔️ **[`MessageBroker - using RabbitMQ`]
-- ✔️ **[`Monitoring - using Grafana + Prometheus`]
-- ✔️ **[`ServicesDiscovery - using Eureka`]
+- ✔️ **[`Auto register Services`]**
+- ✔️ **[`Caching`]**
+- ✔️ **[`AuditLog`]**
+- ✔️ **[`Respository + UnitOfWork`]**
+- ✔️ **[`HealthChecks`]**
+- ✔️ **[`Logging`]**
+- ✔️ **[`MessageBroker - using RabbitMQ`]**
+- ✔️ **[`Monitoring - using Grafana + Prometheus`]**
+- ✔️ **[`ServicesDiscovery - using Eureka`]**
