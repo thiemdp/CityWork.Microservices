@@ -6,7 +6,7 @@ namespace CityWork.Shared.Exceptions
     {
         public NotFoundException()
             : base()
-        { 
+        {
         }
 
         public NotFoundException(string message)
