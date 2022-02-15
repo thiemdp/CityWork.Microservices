@@ -23,8 +23,8 @@ namespace CityWork.Services.AuditLog.API
 
         public static void UseModuleMiddleware(this IApplicationBuilder app)
         {
-            app.UseDiscoveryClientEureka();
-           
+            app.UseCityWorkServicesDiscoveryClient();
+
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
             {
                 serviceScope?.ServiceProvider.GetRequiredService<AuditLogDbContext>().Database.Migrate();

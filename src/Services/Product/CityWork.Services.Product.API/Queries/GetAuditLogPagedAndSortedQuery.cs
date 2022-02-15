@@ -23,7 +23,7 @@ namespace CityWork.Services.Product.API
         }
         public async Task<PagedResult<AuditLogFullResponse>> Handle(GetAuditLogPagedAndSortedQuery request, CancellationToken cancellationToken)
         {
-            string url = $"http://AUDITLOGAPI/api/AuditLogs/Get?KeyWords={request.KeyWords}&Action={request.Action}&PageSize={request.PageSize}&PageNumber={request.PageNumber}";
+            string url = $"https://AuditLogApi/api/AuditLogs/Get?KeyWords={request.KeyWords}&Action={request.Action}&PageSize={request.PageSize}&PageNumber={request.PageNumber}";
             var result = await _restClient.GetAsync<PagedResult<AuditLogFullResponse>>(url,cancellationToken);
             return result;
         }

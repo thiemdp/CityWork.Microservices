@@ -6,6 +6,11 @@ services:
     container_name: discoveryservice-eureka
     ports:
        - 8761:8761
+  consul:  
+    image: consul
+    container_name: consul-discoveryservice
+    ports:
+       - 8500:8500
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
