@@ -18,7 +18,7 @@ namespace CityWork.Application
             {
                 return new LoggingOptions();
             });
-            builder.Services.AddCityWorkServicesDiscovery(builder.Configuration);
+            builder.Services.AddServicesDiscovery(builder.Configuration);
             builder.Services.AddSingleton(appSettings);
             builder.Services.AddMediatR(assembly);
             builder.Services.AddAutoMapper(assembly);

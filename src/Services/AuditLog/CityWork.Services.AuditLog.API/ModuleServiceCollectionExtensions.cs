@@ -23,7 +23,7 @@ namespace CityWork.Services.AuditLog.API
 
         public static void UseModuleMiddleware(this IApplicationBuilder app)
         {
-            app.UseCityWorkServicesDiscoveryClient();
+            app.UseServicesDiscoveryClient();
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
             {
