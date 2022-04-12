@@ -3,14 +3,17 @@ version: '3.4'
 services:
   eureka:
     image: steeltoeoss/eureka-server
-    container_name: discoveryservice-eureka
+    container_name: eureka-discoveryservice
     ports:
        - 8761:8761
+    restart: always
   consul:  
-    image: consul
+    image: consul:lastest
+    command: consul agent -dev -log-level=warn -ui -client=0.0.0.0
     container_name: consul-discoveryservice
     ports:
        - 8500:8500
+    restart: always
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -20,6 +23,7 @@ services:
     volumes:
        - rabbitmqdata:/var/lib/rabbitmq
     hostname: rabbitmq
+    restart: always
 
   # elasticsearch + Kibana
   elasticsearch:
@@ -51,6 +55,7 @@ services:
       - 9300:9300
     networks:
       - esnet
+    restart: always
   kibana:
     image: docker.elastic.co/kibana/kibana:7.17.0
     container_name: kibana

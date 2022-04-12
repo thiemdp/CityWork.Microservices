@@ -1,0 +1,50 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{url}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/productapiip/{url}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{url}",
+      "DownstreamScheme": "https",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "ReRoutesCaseSensitive": false,
+      "UseServiceDiscovery": true,
+      "ServiceName": "ProductApi",
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/productapi/{url}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{url}",
+      "DownstreamScheme": "https",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "ReRoutesCaseSensitive": false,
+      "ServiceName": "AuditLogApi",
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/AuditLogApi/{url}" ,
+      "UseServiceDiscovery": true
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "scheme": "http",
+      "Host": "localhost",
+      "Port": 8500,
+       "Type": "Consul",
+       //"Type": "PollConsul",
+       //"PollingInterval": 100
+    }
+  }
+}  
